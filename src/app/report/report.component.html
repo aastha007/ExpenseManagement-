@@ -1,0 +1,78 @@
+<br>
+<br>
+<div class="text-center" style="margin-left: 4%;">
+<div class=" container bg-light row  " style="border:1px solid black; width:100%;">
+  
+  <span class="col-md-4" style="padding:2%;">
+    <h5>
+    <label for="FromDate">From</label>
+  </h5>&nbsp;
+      <input type="date" name="fromDate" #fromDate> 
+  
+    </span>  
+  <span class="col-md-4" style="padding:2%;">
+   <h5> <label for="toDate">To</label>
+    </h5>&nbsp;
+      <input type="date" name="toDate" #toDate>
+  </span>
+  <span class="col-md-4" style="padding:2%;">
+      <h5> <label for="For">For</label>  
+      </h5> &nbsp;
+ 			
+      <select name="For" #display >
+  <option value="Expense" selected>Expense</option>
+  <option value="Income">Income</option>
+  
+</select>
+&nbsp;
+  <button class="btn btn-primary" (click)="Onselection(display,fromDate, toDate)">Show</button>
+  </span>
+</div>
+</div>
+<div class="container" *ngIf="expense==true"> 
+  <div class="container"style="overflow-x:auto;" >
+    <table class="table">
+        <thead class="bg-dark">
+          <tr>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody class="bg-secondary" >
+            <tr *ngFor= "let i of ExpenseArray">
+                <td> {{ i.expense_Category }} </td>
+                <td> {{ i.date }} </td>
+                <td> {{ i.amount }}</td>
+                <td> {{ i.description }} </td>
+                <td> <button class="btn btn-danger" (click)="OnDeleteExpense(i.eC_Id)">Delete</button> </td>
+              </tr>  
+              </tbody>    
+    </table>
+   </div></div>
+<div class="container" *ngIf="income==true"> 
+  <div class="container">
+      <table class="table">
+          <thead class="bg-dark">
+            <tr>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Description</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody class="bg-secondary">
+              <tr *ngFor= "let i of IncomeArray">
+                  <td> {{ i.income_Category }} </td>
+                  <td> {{ i.date }} </td>
+                  <td> {{ i.amount }}</td>
+                  <td> {{ i.description }} </td>
+                  <td> <button class="btn btn-danger" (click)="OnDeleteIncome(i.iC_Id)">Delete</button> </td>
+                </tr>  
+                </tbody>    
+      </table>
+     </div>
+</div>

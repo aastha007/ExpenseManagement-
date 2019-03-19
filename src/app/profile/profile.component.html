@@ -1,0 +1,120 @@
+<br>
+<br>
+<div class="container">
+
+  <div class="card-deck">
+    <div class="card bg-success">
+      <div class="card-body text-center">
+      <h3>Income</h3> 
+      <h6> {{ IAmount }} </h6> 
+      </div>
+    </div>
+    <div class="card bg-warning">
+
+      <div class="card-body text-center">
+          <h3>Expense</h3> 
+          <h6> {{ EAmount }} </h6>   
+      </div>
+    </div>
+    <div class="card bg-danger">
+      <div class="card-body text-center">
+          <h3>Balance</h3> 
+          <h6> {{ UserBalance }}  </h6> 
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+<br>
+<br>
+ <div class="container row" style="text-align: center">
+   <span class="col-lg-4 col-4"></span>
+   &nbsp;
+   &nbsp;
+   &nbsp;
+   &nbsp;
+   &nbsp;
+   &nbsp;
+<span class ="col-lg-4 col-4 ">
+  <button type="button" class="btn btn-dark btn-lg" (click)="toggleExpense()" >Add Expense</button>
+&nbsp;    <button type="button" class="btn btn-dark btn-lg" (click)="toggleIncome()">Add Income</button>
+</span>
+<span class="col-lg-4 col-4"></span>
+</div>
+  <br>
+  <br>
+  <div class="container bg-light" *ngIf="(Edisplay==true)&&(Idisplay==false)" style="border:1px solid black; text-align: center; display:auto;">
+    <br>
+<h4> Add Expense</h4>
+    <br>
+      <label for="Date">Date</label>
+      &nbsp;
+      <input type="date" name="date" #ExpenseDate>
+      
+  <br/>
+    <br/>
+  <label> Amount</label>
+  &nbsp;
+    <input type="text" name="Amount" #ExpenseAmount> 
+    <br/>
+    <br/>
+    <label>Description</label>
+&nbsp;    <input type="text" name="Description" #ExpenseDescription>
+    <br/>
+    <br/>
+      <label>Type</label>
+ &nbsp;
+      <select #TypeOfExpense>
+  <option value="Travel" selected>Travel</option>
+  <option value="Snack">Snack</option>
+  <option value="Meal">Meal</option>
+  <option value="Clothes">Clothes</option>
+</select>
+<br/>
+<hr>
+<button type="button" class="btn btn-info" (click)="AddExpense(ExpenseDate,ExpenseAmount,ExpenseDescription,TypeOfExpense)">Add</button>
+<br>
+<br>
+  </div>
+
+  <div class="container bg-light" *ngIf="(Idisplay==true)&& (Edisplay==false)" style="border:1px solid black; text-align: center; display:auto;">
+  
+      <br>
+      <h4> Add Income</h4>
+          <br>
+            <label for="Date">Date</label>
+            &nbsp;
+            <input type="date" name="date" #IncomeDate>
+            
+        <br/>
+          <br/>
+        <label> Amount</label>
+        &nbsp;
+          <input type="text" name="Amount" #IncomeAmount> 
+          <br/>
+          <br/>
+          <label>Description</label>
+      &nbsp;    <input type="text" name="Description" #IncomeDescription>
+          <br/>
+          <br/>
+            <label>Type</label>
+       &nbsp;
+       <select #TypeOfIncome>
+          <option value="Salary" selected>Salary</option>
+          <option value="Consulancy">Consultancy</option>
+          <option value="Gift">Gift</option>
+  
+        </select>
+      <br/>
+      <hr>
+      <button type="button" class="btn btn-info" (click)="AddIncome(IncomeDate,IncomeAmount,IncomeDescription,TypeOfIncome)">Add</button>
+      <br>
+      <br>
+        
+      
+  
+  </div>
+           
+        
