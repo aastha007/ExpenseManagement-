@@ -12,9 +12,8 @@ export class ApiService {
 Income ={date:"",type:"", amount:"", description:""};
 //User={}
 loggedIn=false;
-  getUser(){
-     return this.http.get('http://localhost:52198/api/user');
-  }
+
+  
   getIncomeAll(){
     return this.http.get('http://localhost:52198/api/incomecategory');
   }
@@ -46,4 +45,6 @@ loggedIn=false;
   {
     return this.http.delete(`http://localhost:52198/api/expensecategory/${id}`);
   }
+
+
 }

@@ -8,8 +8,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { ReportComponent } from './report/report.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import {ApiService} from '../app/api.service';
+import { AuthService } from './auth.service';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,11 @@ import {ApiService} from '../app/api.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService,  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

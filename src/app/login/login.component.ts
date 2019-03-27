@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,40 +11,22 @@ import { ApiService } from '../api.service';
 })
 export class LoginComponent implements OnInit {
   admin=false;
-  constructor(private apiService:ApiService, private router:Router) { }
+  constructor(private apiService:ApiService, private router:Router, private authService: AuthService) { }
+
 userArray;
 
   ngOnInit() {
-    this.apiService.getUser().subscribe(res=> this.userArray=res );
+    
 
   }
-  onLogin(email:HTMLInputElement,password:HTMLInputElement)
+  onLogin(username: HTMLInputElement, password:HTMLInputElement)
   {
-    if(email.value=="" || password.value=="")
-    {
-      alert("Please Enter all the fields");
+    const cred = {
+      UserName: username.value,
+      Email: "test@pp.com",
+      Password: password.value
     }
-    else
-    {
-      let flag=false;
-      for(let i of this.userArray)
-    {
-      if((i.email==email.value)&&(i.password==password.value))
-      {
-        alert("login sucessful");
-        flag=true;
-       this.apiService.loggedIn=true;
-        this.router.navigate(['/home/'+ i.user_Id]);
-        
-      }
-    }
-     if(flag== false)
-      {
-        alert("Please Enter correct details.");
 
-    }
-   
-  }
-
+    this.authService.login(cred);
   }
 }

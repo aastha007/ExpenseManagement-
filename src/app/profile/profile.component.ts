@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileComponent implements OnInit {
   ExpenseArray;
   IncomeArray;
-  id = 5;
+  id = 1;
   IAmount = 0;
   EAmount = 0;
   UserBalance = 0;
@@ -22,8 +22,8 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  Income = { User_Id: 5, date: "", income_category: "", amount: "", description: "" };
-  Expense = { User_Id: 5, date: "", expense_category: "", amount: "", description: "" };
+  Income = { User_Id: 1, date: "", income_category: "", amount: "", description: "" };
+  Expense = { User_Id: 1, date: "", expense_category: "", amount: "", description: "" };
 
   ngOnInit() {
 

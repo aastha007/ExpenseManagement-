@@ -13,7 +13,7 @@ export class ReportComponent implements OnInit {
   constructor(private apiservice:ApiService, private route:ActivatedRoute) { 
    // this.id=this.route.snapshot.params.id;
   }
-  id =5;
+  id =1;
   expense=false;
   income=false;
   ExpenseArray;

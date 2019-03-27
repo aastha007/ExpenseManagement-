@@ -8,12 +8,8 @@
     </div>
     <form  name="registration">
        <div class="form-group">
-          <label for="firstname">First Name*</label>
-          <input type="text"  name="firstName" class="form-control" id="firstname"  placeholder="Enter Firstname" #firstName>
-       </div>
-       <div class="form-group">
-          <label for="lastname">Last Name*</label>
-          <input type="text"  name="lastName" class="form-control" id="lastname"  placeholder="Enter Lastname"#lastName>
+          <label for="firstname">User Name*</label>
+          <input type="text"  name="firstName" class="form-control" id="firstname"  placeholder="Enter Firstname" #username>
        </div>
        <div class="form-group">
           <label for="email">Email Address*</label>
@@ -28,7 +24,7 @@
           <input type="password" name="confirmPassword" id="confirmpassword"  class="form-control"  placeholder="Enter Password" #confirmPassword>
        </div>
        <div class="col-md-12 text-center mb-3">
-          <button type="submit" class=" btn btn-block mybtn btn-primary " (click)="validateForm(firstName,lastName, email, password,confirmPassword)" >SIGN UP</button>
+          <button type="submit" class=" btn btn-block mybtn btn-primary " (click)="validateForm(username, email, password,confirmPassword)" >SIGN UP</button>
        </div>
        <div class="col-md-12 ">
           <div class="form-group">
