@@ -10,13 +10,15 @@
       
   <ul class="navbar-nav ml-auto">
       <li class="nav-item ">
-        <a class="nav-link" href="#" routerLink="">Home</a>
+        <a class="nav-link"  routerLink="">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/profile">Profile</a>
+        <a *ngIf="this.authservice.isAuthenticated" class="nav-link"  routerLink="/profile/{{this.authservice.id}}">Profile</a>
+        <a *ngIf="!this.authservice.isAuthenticated" class="nav-link"  routerLink="/profile">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/report">Report</a>
+        <a *ngIf="this.authservice.isAuthenticated" class="nav-link"  routerLink="/report/{{this.authservice.id}}">Report</a>
+        <a *ngIf="!this.authservice.isAuthenticated" class="nav-link"  routerLink="/report">Report</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" href="#">About Us </a>
@@ -24,17 +26,17 @@
         <li class="nav-item">
             <a class="nav-link" href="#">Contact Us </a>
           </li>
-          <li class="nav-item" *ngIf="!apiService.loggedIn">
+          <li class="nav-item" *ngIf="!this.authservice.isAuthenticated">
             <a href="#" class="btn btn-info " role="button" routerLink="/signup">Signup</a>
             &nbsp;
             &nbsp;
           </li>
-          <li class="nav-item" *ngIf="!apiService.loggedIn">
+          <li class="nav-item" *ngIf="!this.authservice.isAuthenticated">
             
             <button type="button" class="btn btn-info " routerLink="/login">Login</button>
           </li>
-          <li class="nav-item" *ngIf="apiService.loggedIn">
-            <button type="button" class="btn btn-danger" routerLink="/login">Logout</button>
+          <li class="nav-item" *ngIf="this.authservice.isAuthenticated">
+            <button type="button" class="btn btn-danger" (click)="this.authservice.logout()">Logout</button>
           </li>
     </ul>
     </div>

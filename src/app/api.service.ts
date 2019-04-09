@@ -28,9 +28,9 @@ loggedIn=false;
   }
   
   postExpense(Expense){
-    
     return this.http.post('http://localhost:52198/api/expensecategory',Expense).subscribe(res=>{console.log(res)});
   }
+  
   postIncome(Income){
     
     return this.http.post('http://localhost:52198/api/incomecategory',Income).subscribe(res=>{console.log(res)});

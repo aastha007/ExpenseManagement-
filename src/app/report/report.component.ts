@@ -11,9 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 export class ReportComponent implements OnInit {
 
   constructor(private apiservice:ApiService, private route:ActivatedRoute) { 
-   // this.id=this.route.snapshot.params.id;
+     this.id = this.route.snapshot.params.id;
   }
-  id =1;
+
+  id;
   expense=false;
   income=false;
   ExpenseArray;
@@ -44,8 +45,6 @@ export class ReportComponent implements OnInit {
 
       this.ExpenseArray = [];
       
-    //  this.apiservice.getUserExpense(this.id).subscribe((e=[])=>this.ExpenseArray=e); //userId
-   // console.log(this.ExpenseArray);
    for (let i of this.newE) {
     if((i.date>=startDate.value)&&(i.date<=endDate.value))
     {
@@ -60,8 +59,6 @@ export class ReportComponent implements OnInit {
     else if(selectedValue.value=="Income")
     {
       this.IncomeArray = [];
-     // this.apiservice.getUserIncome(this.id).subscribe((e=[])=>this.IncomeArray=e);
-   // console.log(this.IncomeArray);
    for (let i of this.newI) {
     if((i.date>startDate.value)&&(i.date<endDate.value))
     {

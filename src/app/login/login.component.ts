@@ -19,11 +19,11 @@ userArray;
     
 
   }
-  onLogin(username: HTMLInputElement, password:HTMLInputElement)
+  onLogin(username: HTMLInputElement, email,  password:HTMLInputElement)
   {
     const cred = {
       UserName: username.value,
-      Email: "test@pp.com",
+      Email: email.value,
       Password: password.value
     }
 

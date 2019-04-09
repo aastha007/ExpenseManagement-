@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 
 
 @Component({
@@ -9,6 +10,12 @@ import { ApiService } from './api.service';
 })
 export class AppComponent {
   title = 'frontendExManage';
-  constructor(private apiService:ApiService){}
+  id;
+  constructor(private authservice: AuthService) {
+    if(this.authservice.isAuthenticated) {
+      this.id = this.authservice.id;
+    } else 
+    this.id = "";
+  }
 
 }

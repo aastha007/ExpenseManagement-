@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileComponent implements OnInit {
   ExpenseArray;
   IncomeArray;
-  id = 1;
+  id;
   IAmount = 0;
   EAmount = 0;
   UserBalance = 0;
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   Edisplay=false;
 
   constructor(private apiservice: ApiService, private route: ActivatedRoute) {
-
+    this.id = this.route.snapshot.params.id;
   }
 
   Income = { User_Id: 1, date: "", income_category: "", amount: "", description: "" };
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
       alert("Please Enter All The Fields!");
     }
     else {
-      this.Expense.User_Id = this.Expense.User_Id;
+      this.Expense.User_Id = this.id;
       this.Expense.date = ExpenseDate.value;
       this.Expense.amount = ExpenseAmount.value;
       this.Expense.description = ExpenseDescription.value;
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
       alert("Please Enter All The Fields!");
     }
     else {
-      this.Income.User_Id = this.Income.User_Id;
+      this.Income.User_Id = this.id;
       this.Income.date = IncomeDate.value;
       this.Income.amount = IncomeAmount.value;
       this.Income.description = IncomeDescription.value;

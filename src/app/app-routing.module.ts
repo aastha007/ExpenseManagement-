@@ -11,6 +11,8 @@ const routes: Routes = [
   {path:'home', component:HomePageComponent},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
+  {path:'profile/:id', component:ProfileComponent },
+  {path:'report/:id', component: ReportComponent},
   {path:'profile', component:ProfileComponent },
   {path:'report', component: ReportComponent},
   {path:'home/:id', component:HomePageComponent}
