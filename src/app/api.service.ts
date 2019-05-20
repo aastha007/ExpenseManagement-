@@ -17,26 +17,31 @@ loggedIn=false;
   getIncomeAll(){
     return this.http.get('http://localhost:52198/api/incomecategory');
   }
-  getUserIncome(id){
-    return this.http.get(`http://localhost:52198/api/incomecategory/${id}`);
+  getUserIncome(startDate, endDate){
+    return this.http.get("http://localhost:52198/api/incomecategory/" + startDate.value + "/" + endDate.value);
+  }
+  getUserIncomeAmount(id) {
+    return this.http.get('http://localhost:52198/api/incomecategory/' + id);
+  }
+  getUserExpenseAmount(id) {
+    return this.http.get('http://localhost:52198/api/expensecategory/' + id);
   }
   getExpenseAll(){
     return this.http.get('http://localhost:52198/api/expensecategory');
   }
-  getUserExpense(id){
-    return this.http.get(`http://localhost:52198/api/expensecategory/${id}`);
+  getUserExpense(startDate, endDate){
+    return this.http.get("http://localhost:52198/api/expensecategory/" + startDate.value + "/" + endDate.value);
   }
   
   postExpense(Expense){
-    return this.http.post('http://localhost:52198/api/expensecategory',Expense).subscribe(res=>{console.log(res)});
+    return this.http.post('http://localhost:52198/api/expensecategory',Expense);
   }
   
   postIncome(Income){
-    
-    return this.http.post('http://localhost:52198/api/incomecategory',Income).subscribe(res=>{console.log(res)});
+    return this.http.post('http://localhost:52198/api/incomecategory',Income);
   }
   addUser(user){
-    return this.http.post('http://localhost:52198/api/user',user).subscribe(res=>{console.log(res)});
+    return this.http.post('http://localhost:52198/api/user',user);
   }
   DeleteIncome(id){
     return this.http.delete(`http://localhost:52198/api/incomecategory/${id}`);

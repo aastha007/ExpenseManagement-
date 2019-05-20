@@ -19,76 +19,56 @@ export class ReportComponent implements OnInit {
   income=false;
   ExpenseArray;
   IncomeArray;
-  newE;
-  newI;
+  startDate;
+  endDate;
 
-  ngOnInit() {
-    this.apiservice.getUserIncome(this.id).subscribe(
-      res => {
-        this.newI = res;
-        this.IncomeArray = res;
-      }
-    );
-    this.apiservice.getUserExpense(this.id).subscribe(res => {
-      this.newE = res;
-      this.ExpenseArray = res;
-    }
-    );
-    
+  ngOnInit() {    
   }
+  
   Onselection(selectedValue:HTMLSelectElement, startDate:HTMLInputElement, endDate:HTMLInputElement )
   {
-    console.log(startDate.value);
-    console.log(endDate.value);
-    if(selectedValue.value=="Expense")
-    {
+    this.startDate = startDate;
+    this.endDate = endDate;
 
-      this.ExpenseArray = [];
-      
-   for (let i of this.newE) {
-    if((i.date>=startDate.value)&&(i.date<=endDate.value))
-    {
-      console.log(i);
-      this.ExpenseArray.push(i);
-      
+    if(selectedValue.value == 'Expense') {
+      this.income = false;
+      this.expense = true;
     }
-   }   
-   this.expense=true;
-      this.income=false;
+    else {
+      this.expense = false;
+      this.income = true;
     }
-    else if(selectedValue.value=="Income")
-    {
-      this.IncomeArray = [];
-   for (let i of this.newI) {
-    if((i.date>startDate.value)&&(i.date<endDate.value))
-    {
-      console.log(i);
-      this.IncomeArray.push(i);
-    }
-   }
-      this.income=true;
-      this.expense=false; 
+    this.apiservice.getUserExpense(startDate, endDate).subscribe(res => {
+      this.ExpenseArray = res;
+    });
 
-    }
-    else{
-      this.income=false;
-      this.expense=false;
+    this.apiservice.getUserIncome(startDate, endDate).subscribe(res => {
+      this.IncomeArray = res;
+    });
 
-    }
+
 
   }
-  OnDeleteExpense(eid:number){
-    this.apiservice.DeleteExpense(eid).subscribe(res => {
-      this.ExpenseArray=res;
-      this.apiservice.getUserExpense(this.id).subscribe((e=[])=>this.ExpenseArray=e);
-    });//id is product id
+  OnDeleteExpense(eid:number) {
+    this.apiservice.DeleteExpense(eid).subscribe(
+      ()=>{
+        this.apiservice.getUserExpense(this.startDate, this.endDate).subscribe(res => {
+          this.ExpenseArray = res;
+        });
+      }
+    );
     
   }
+
   OnDeleteIncome(Iid:number){
-    this.apiservice.DeleteIncome(Iid).subscribe(res => {
-      this.IncomeArray=res;
-      this.apiservice.getUserIncome(this.id).subscribe((e=[])=>this.IncomeArray=e);
-    });
+    this.apiservice.DeleteIncome(Iid).subscribe(
+      ()=>{
+        this.apiservice.getUserIncome(this.startDate, this.endDate).subscribe(res => {
+          this.IncomeArray = res;
+        });
+      }
+    );
+    
   }
 
 }

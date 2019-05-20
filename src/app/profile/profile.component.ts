@@ -11,9 +11,9 @@ export class ProfileComponent implements OnInit {
   ExpenseArray;
   IncomeArray;
   id;
-  IAmount = 0;
-  EAmount = 0;
-  UserBalance = 0;
+  IAmount;
+  EAmount;
+  UserBalance;
  
   Idisplay=false;
   Edisplay=false;
@@ -22,71 +22,66 @@ export class ProfileComponent implements OnInit {
     this.id = this.route.snapshot.params.id;
   }
 
-  Income = { User_Id: 1, date: "", income_category: "", amount: "", description: "" };
-  Expense = { User_Id: 1, date: "", expense_category: "", amount: "", description: "" };
 
   ngOnInit() {
+    this.getBalance();
+  }
 
-    this.apiservice.getUserIncome(this.id).subscribe(
+  getBalance() {
+    this.apiservice.getUserIncomeAmount(this.id).subscribe(
       res => {
-        this.IncomeArray = res;
-        for (let i of this.IncomeArray) {
-          this.IAmount += i.amount;
-        }
-      
-    this.apiservice.getUserExpense(this.id).subscribe(res => {
-      this.ExpenseArray = res;
-      for (let i of this.ExpenseArray) {
-        this.EAmount += i.amount;
-      }
-      
-    this.UserBalance = this.IAmount - this.EAmount;
-
+        this.IAmount = res;
+        this.apiservice.getUserExpenseAmount(this.id).subscribe(res => {
+           this.EAmount = res;
+           this.UserBalance = this.IAmount - this.EAmount;
+        });
     }
     );
   }
-  );
 
+  AddExpense(ExpenseDate: HTMLInputElement, ExpenseAmount: HTMLInputElement, ExpenseDescription: HTMLInputElement, TypeOfExpense: HTMLSelectElement) 
+  {
+    
+      var Expense = {
+          User_Id : this.id,
+          Date : ExpenseDate.value,
+          Amount : Number(ExpenseAmount.value),
+          Description : ExpenseDescription.value,
+          Expense_Category : TypeOfExpense.value
+      }
+
+      this.apiservice.postExpense(Expense).subscribe( 
+        (e)=> { 
+          console.log();
+          this.getBalance();
+        } 
+      );
+
+     
+    
   }
-  AddExpense(ExpenseDate: HTMLInputElement, ExpenseAmount: HTMLInputElement, ExpenseDescription: HTMLInputElement, TypeOfExpense: HTMLSelectElement) {
-    if (ExpenseAmount.value == "" || ExpenseDate.value == "" || ExpenseDescription.value == "" || TypeOfExpense.value == "") {
-      alert("Please Enter All The Fields!");
-    }
-    else {
-      this.Expense.User_Id = this.id;
-      this.Expense.date = ExpenseDate.value;
-      this.Expense.amount = ExpenseAmount.value;
-      this.Expense.description = ExpenseDescription.value;
-      this.Expense.expense_category = TypeOfExpense.value;
-      console.log("add function running");
-      this.apiservice.postExpense(this.Expense);
-      ExpenseDate.value="";
-      ExpenseAmount.value="";
-      ExpenseDescription.value="";
-      TypeOfExpense.value="";
-      alert("Expense Added.");
-      this.Edisplay=false;
-    }
-  }
+
   AddIncome(IncomeDate: HTMLInputElement, IncomeAmount: HTMLInputElement, IncomeDescription: HTMLInputElement, TypeOfIncome: HTMLSelectElement) 
   {
     if (IncomeAmount.value == "" || IncomeDate.value == "" || IncomeDescription.value == "" || TypeOfIncome.value == "") {
       alert("Please Enter All The Fields!");
     }
     else {
-      this.Income.User_Id = this.id;
-      this.Income.date = IncomeDate.value;
-      this.Income.amount = IncomeAmount.value;
-      this.Income.description = IncomeDescription.value;
-      this.Income.income_category = TypeOfIncome.value;
-      console.log("add function running");
-      this.apiservice.postIncome(this.Income);
-      IncomeDate.value="";
-      IncomeAmount.value="";
-      IncomeDescription.value="";
-      TypeOfIncome.value="";
-      alert("Income Added");
-      this.Idisplay=false;
+      var Income = {
+        User_Id : this.id,
+        Date : IncomeDate.value,
+        Amount : Number(IncomeAmount.value),
+        Description : IncomeDescription.value,
+        Income_Category : TypeOfIncome.value
+    }
+
+      this.apiservice.postIncome(Income).subscribe( 
+        (e)=> { 
+          console.log();
+          this.getBalance();
+        } 
+      );
+
 
     }
   }

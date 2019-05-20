@@ -14,6 +14,5 @@ export class AdduserService {
   
     this.users.push({firstName:firstName, lastName:lastName, email:email,password:password});
     alert("user added");
-    console.log(this.users);
   }
 }

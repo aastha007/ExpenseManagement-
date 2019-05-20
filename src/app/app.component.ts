@@ -12,10 +12,13 @@ export class AppComponent {
   title = 'frontendExManage';
   id;
   constructor(private authservice: AuthService) {
-    if(this.authservice.isAuthenticated) {
-      this.id = this.authservice.id;
-    } else 
-    this.id = "";
+    if(localStorage.getItem('id')) {
+      this.authservice.id = localStorage.getItem('id');
+      this.id = localStorage.getItem('id');
+    }   
+    else 
+      this.id = "";
+
   }
 
 }
